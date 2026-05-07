@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/')
 })
 
-test.only('navigate to form page', async ({ page }) => {
+test('navigate to form page', async ({ page }) => {
 
     const pm = new PageManager(page)
 
@@ -44,4 +44,15 @@ test('parameterized methods', async ({ page }) => {
     await pm.ondatePickerPage().selectCommonDatePickerDateFromToday(1)
     await pm.ondatePickerPage().selectDatePickerWithRangeFromToday(1, 2)
 
+})
+
+test.only('TESTING WITH ARGOS CI', async ({ page }) => {
+
+    const pm = new PageManager(page)
+
+    await pm.navigateTo().formLayoutsPage()
+    await pm.navigateTo().datePickerPage()
+    await pm.navigateTo().smartTablePage()
+    await pm.navigateTo().toastrPage()
+    await pm.navigateTo().tooltipPage()
 })
