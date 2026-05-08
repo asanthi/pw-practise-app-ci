@@ -46,13 +46,3 @@ test('parameterized methods', async ({ page }) => {
 
 })
 
-test.only('TESTING WITH ARGOS CI', async ({ page }) => {
-
-    const pm = new PageManager(page)
-
-    await pm.navigateTo().formLayoutsPage()
-    await pm.navigateTo().datePickerPage()
-    await pm.navigateTo().smartTablePage()
-    await pm.navigateTo().toastrPage()
-    await pm.navigateTo().tooltipPage()
-})
