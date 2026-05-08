@@ -8,7 +8,17 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
- reporter: 'html',
+ reporter: [
+  process.env.CI ? ["dot"] : ["list"],
+   [
+      "@argos-ci/playwright/reporter",
+     {
+        // Upload to Argos on CI only.
+        uploadToArgos: !!process.env.CI,
+      },
+    ],
+  ['html']
+ ],
 /** 
   reporter: [ ['json', {outputFile:'test-results/jsonReport.json'}],  
    ['junit', {outputFile:'test-results/junitsReport.json'}],
@@ -18,7 +28,8 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:4200/',
     trace: 'on-first-retry',
-    video : 'on'
+    video : 'on',
+    screenshot: "only-on-failure",
   },
   projects: [
     {
