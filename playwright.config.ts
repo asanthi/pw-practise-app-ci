@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import { createArgosReporterOptions } from "@argos-ci/playwright/reporter";
+
 
 export default defineConfig({
 
@@ -9,20 +9,18 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
-  reporter: [
-    process.env.CI ? ["dot"] : ["list"],
-    ["@argos-ci/playwright/reporter",
-      createArgosReporterOptions({
-        // Upload to Argos on CI only.
-        uploadToArgos: !!process.env.CI,
-
-        // Set your Argos token (required if not using GitHub Actions).
-        token: "argos_cphfs39jd1srkxkjdoz1ershyz9hol5ewa",
-      }),
-
-    ],
-    ['html']
+ reporter: [
+  process.env.CI ? ['dot'] : ['list'],
+  [
+    '@argos-ci/playwright',
+    {
+      uploadToArgos: !!process.env.CI,
+      token: process.env.ARGOS_TOKEN,
+    },
   ],
+  ['html'],
+
+],
   /** 
     reporter: [ ['json', {outputFile:'test-results/jsonReport.json'}],  
      ['junit', {outputFile:'test-results/junitsReport.json'}],
