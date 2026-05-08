@@ -12,7 +12,7 @@ export default defineConfig({
  reporter: [
   process.env.CI ? ['dot'] : ['list'],
   [
-    '@argos-ci/playwright',
+    '@argos-ci/playwright/reporter',
     {
       uploadToArgos: !!process.env.CI,
       token: process.env.ARGOS_TOKEN,
