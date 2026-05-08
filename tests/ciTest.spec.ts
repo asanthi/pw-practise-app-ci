@@ -20,7 +20,8 @@ test('navigate to form page', async ({ page }) => {
     await pm.navigateTo().toastrPage()
      await argosScreenshot(page, "toastrPage");
     await pm.navigateTo().tooltipPage()
-     await argosScreenshot(page, "tooltipPage");
+     await argosScreenshot(page, "tooltipPage"):
+     
 })
 
 
